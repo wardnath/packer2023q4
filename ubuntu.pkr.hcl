@@ -1,10 +1,20 @@
-variable "image_name" {
+variable "input_image" {
   type = string
   default = "ubuntu:20.04"
 }
 
+variable "image_name" {
+  type = string
+  default = "my-ubuntu"
+}
+
+variable "image_tag" {
+  type = string
+  default = "v1"
+}
+
 source "docker" "ubuntu" {
-  image = var.image_name
+  image = "${var.input_image}"
   commit = true
 }
 
@@ -20,7 +30,7 @@ build {
   }
 
   post-processor "docker-tag" {
-    repository = "${env.IMAGE_NAME}"
-    tag = "latest"
+    repository = "${var.image_name}"
+    tags = ["${var.image_tag}"]
   }
 }
