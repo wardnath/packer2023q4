@@ -20,7 +20,7 @@ build {
   }
 
   post-processor "docker-tag" {
-    repository = "${env("IMAGE_NAME")}"
+    repository = "${env.IMAGE_NAME}"
     tag = "latest"
   }
 }
